@@ -1,6 +1,7 @@
 # MyREDS Gate Controller
+An app for improving house residency area. The app serves a purpose to allow residents in residency area to have the ability to control the residency's entrance and exit gates.
 
-This is an app I made for my internship program at AR Mechatronic PLT. The app serves a purpose to allow residents in residency area to have the ability to control the residency's entrance and exit gates.
+This is an app I made for my internship program for 3 months at AR Mechatronics PLT. 
 
 ## How does it work?
 
