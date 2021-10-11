@@ -119,7 +119,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   'Entrance',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -130,7 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                                 Text(
                                   _gatestatusEntrance,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF606060),
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Roboto',
@@ -140,7 +140,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 // WidgetGateStatusText(status: _gatestatus),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 3,
                             ),
                             GestureDetector(
@@ -149,7 +149,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Exit',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -160,7 +160,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ),
                                   Text(
                                     _gatestatusExit,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF606060),
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Roboto',
@@ -173,7 +173,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                           ],
                         ),
-                        Center(
+                        const Center(
                           child: VerticalDivider(
                             color: Colors.black,
                             thickness: 2,
@@ -219,9 +219,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                     Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '1'});
                                 print('Response status: ${response.statusCode}');
                                 print('Response body: ${response.body}');
-                                // if(_gatestatus==Gatestatusmode.Wait){
-                                //
-                                // }
                                 if(response.statusCode==200){
                                   setState(() {
                                     _gatestatusEntrance='Open ';
@@ -258,9 +255,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '0'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
-                              // if(response.statusCode==200){
-                              //   _gatestatus= 'Close';
-                              // }
                               if(response.statusCode==200){
                                 setState(() {
                                   _gatestatusEntrance='Close';
@@ -321,9 +315,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '1'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
-                              // if(response.statusCode==200){
-                              //   _gatestatus= 'Open';
-                              // }
                               if(response.statusCode==200){
                                 setState(() {
                                   _gatestatusExit='Open ';
@@ -360,9 +351,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '0'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
-                              // if(response.statusCode==200){
-                              //   _gatestatus= 'Close';
-                              // }
                               if(response.statusCode==200){
                                 setState(() {
                                   _gatestatusExit='Close';
@@ -403,36 +391,3 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 }
-
-// class WidgetGateStatusText extends StatelessWidget {
-//   final Gatestatusmode status;
-//   const WidgetGateStatusText({
-//     Key? key, required this.status,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // String? stat;
-//     // switch (status){
-//     //   case Gatestatusmode.Wait:
-//     //     stat = '...';
-//     //     break;
-//     //   case Gatestatusmode.Close:
-//     //     stat = 'Close';
-//     //     break;
-//     //   case Gatestatusmode.Open:
-//     //     stat = 'Open';
-//     //     break;
-//     // }
-//
-//     return Text(
-//       stat,
-//       style: TextStyle(
-//         color: Color(0xFF606060),
-//         fontWeight: FontWeight.w400,
-//         fontFamily: 'Roboto',
-//         fontSize: 24,
-//       ),
-//     );
-//   }
-// }
