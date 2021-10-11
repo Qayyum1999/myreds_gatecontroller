@@ -17,3 +17,7 @@ User can view lists of residency area locations and location ID's.
 User can tap a button to open/close the gate of their chosen residency location.
 ![photo1633521042](https://user-images.githubusercontent.com/90374083/136209457-6b612156-6d58-4415-a80e-c9435f3bcb5c.jpeg)
 
+User can also view the status of the Gates to indicate the opened/closed gate.
+![WhatsApp Image 2021-10-11 at 20 51 01 (1)](https://user-images.githubusercontent.com/90374083/136792960-82616bf4-9a81-418e-bd3c-1145fc39530c.jpeg)
+
+
