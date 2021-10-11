@@ -137,7 +137,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                     fontSize: 24,
                                   ),
                                 ),
-                                // WidgetGateStatusText(status: _gatestatus),
                               ],
                             ),
                             const SizedBox(
@@ -167,7 +166,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                       fontSize: 24,
                                     ),
                                   ),
-                                  // WidgetGateStatusText(status: _gatestatus),
                                 ],
                               ),
                             ),
