@@ -211,8 +211,24 @@ class _DetailScreenState extends State<DetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                              onTap: () async {
+                          Container(
+                            width: 142,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFF00FF38),
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child:  TextButton.icon(
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
+                                backgroundColor: Colors.white,
+                                textStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.normal,fontWeight: FontWeight.w400)
+                              ),
+                              label: Text('Tap to Open'),
+                              icon: Icon(Icons.touch_app),
+                              onPressed: () async {
                                 var response = await http.put(
                                     Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '1'});
                                 print('Response status: ${response.statusCode}');
@@ -225,59 +241,41 @@ class _DetailScreenState extends State<DetailScreen> {
                                   _gatestatusEntrance='...';
                                 }
                               },
-                            child: Container(
-                              width: 142,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFF00FF38),
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.touch_app),
-                                  Text('Tap to Open'),
-                                ],
-                              ),
                             ),
                           ),
                           const SizedBox(
                             width: 5,
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '0'});
-                              print('Response status: ${response.statusCode}');
-                              print('Response body: ${response.body}');
-                              if(response.statusCode==200){
-                                setState(() {
-                                  _gatestatusEntrance='Close';
-                                });
-                              }else{
-                                _gatestatusEntrance='...';
-                              }
-                            },
-                            child: Container(
-                              width: 142,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFFFF0000),
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
+                          Container(
+                            width: 142,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFFFF0000),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.touch_app),
-                                  Text('Tap to Close'),
-                                ],
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child:  TextButton.icon(
+                              style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.white,
+                                  textStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.normal,fontWeight: FontWeight.w400)
                               ),
+                              label: Text('Tap to Close'),
+                              icon: Icon(Icons.touch_app),
+                              onPressed: () async {
+                                  var response = await http.put(
+                                      Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '0'});
+                                  print('Response status: ${response.statusCode}');
+                                  print('Response body: ${response.body}');
+                                  if(response.statusCode==200){
+                                    setState(() {
+                                      _gatestatusEntrance='Close';
+                                    });
+                                  }else{
+                                    _gatestatusEntrance='...';
+                                  }
+                                },
                             ),
                           ),
                         ],
@@ -307,73 +305,71 @@ class _DetailScreenState extends State<DetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () async {
-                              var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '1'});
-                              print('Response status: ${response.statusCode}');
-                              print('Response body: ${response.body}');
-                              if(response.statusCode==200){
-                                setState(() {
-                                  _gatestatusExit='Open ';
-                                });
-                              }else{
-                                _gatestatusExit='...';
-                              }
-                            },
-                            child: Container(
-                              width: 142,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFF00FF38),
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
+                          Container(
+                            width: 142,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFF00FF38),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.touch_app),
-                                  Text('Tap to Open'),
-                                ],
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child:  TextButton.icon(
+                              style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.white,
+                                  textStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.normal,fontWeight: FontWeight.w400)
                               ),
+                              label: Text('Tap to Open'),
+                              icon: Icon(Icons.touch_app),
+                              onPressed: () async {
+                                  var response = await http.put(
+                                      Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '1'});
+                                  print('Response status: ${response.statusCode}');
+                                  print('Response body: ${response.body}');
+                                  if(response.statusCode==200){
+                                    setState(() {
+                                      _gatestatusExit='Open ';
+                                    });
+                                  }else{
+                                    _gatestatusExit='...';
+                                  }
+                              },
                             ),
                           ),
                           const SizedBox(
                             width: 5,
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '0'});
-                              print('Response status: ${response.statusCode}');
-                              print('Response body: ${response.body}');
-                              if(response.statusCode==200){
-                                setState(() {
-                                  _gatestatusExit='Close';
-                                });
-                              }else{
-                                _gatestatusExit='...';
-                              }
-                            },
-                            child: Container(
-                              width: 142,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFFFF0000),
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
+                          Container(
+                            width: 142,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFFFF0000),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.touch_app),
-                                  Text('Tap to Close'),
-                                ],
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: TextButton.icon(
+                              style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.white,
+                                  textStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.normal,fontWeight: FontWeight.w400)
                               ),
+                              label: Text('Tap to Close'),
+                              icon: Icon(Icons.touch_app),
+                              onPressed:() async {
+                                  var response = await http.put(
+                                      Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '0'});
+                                  print('Response status: ${response.statusCode}');
+                                  print('Response body: ${response.body}');
+                                  if(response.statusCode==200){
+                                    setState(() {
+                                      _gatestatusExit='Close';
+                                    });
+                                  }else{
+                                    _gatestatusExit='...';
+                                  }
+                              },
                             ),
                           ),
                         ],
