@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final String title;
   final String body;
   final Color rectanglecolor;
@@ -18,6 +18,14 @@ class DetailScreen extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  late String _gatestatusEntrance = 'Close';
+  late String _gatestatusExit = 'Close';
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -25,7 +33,7 @@ class DetailScreen extends StatelessWidget {
         child: Stack(
           children: [
             AppBar(
-              backgroundColor: rectanglecolor,
+              backgroundColor: widget.rectanglecolor,
               shadowColor: Colors.transparent,
               leading: IconButton(
                   icon: const Padding(
@@ -58,14 +66,14 @@ class DetailScreen extends StatelessWidget {
           Container(
             height: 92,
             width: double.infinity,
-            color: rectanglecolor,
+            color: widget.rectanglecolor,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(39, 0, 0, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -74,7 +82,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    body,
+                    widget.body,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w400,
@@ -90,7 +98,7 @@ class DetailScreen extends StatelessWidget {
             children: [
               Container(
                 height: 31,
-                color: rectanglecolor,
+                color: widget.rectanglecolor,
               ),
               Center(
                 child: SizedBox(
@@ -102,67 +110,75 @@ class DetailScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Stack(
                       children: [
-                        GestureDetector(
-                          onTap: (){},
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'Entrance',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 14,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Entrance',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Roboto',
+                                    fontSize: 14,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Close',
-                                style: TextStyle(
-                                  color: Color(0xFF606060),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 24,
+                                Text(
+                                  _gatestatusEntrance,
+                                  style: TextStyle(
+                                    color: Color(0xFF606060),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Roboto',
+                                    fontSize: 24,
+                                  ),
                                 ),
+                                // WidgetGateStatusText(status: _gatestatus),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            GestureDetector(
+                              onTap: (){},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Exit',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Roboto',
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    _gatestatusExit,
+                                    style: TextStyle(
+                                      color: Color(0xFF606060),
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Roboto',
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  // WidgetGateStatusText(status: _gatestatus),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        const VerticalDivider(
-                          color: Colors.black,
-                          thickness: 2,
-                          endIndent: 9,
-                          indent: 9,
-                        ),
-                        GestureDetector(
-                          onTap: (){},
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'Exit',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                'Open',
-                                style: TextStyle(
-                                  color: Color(0xFF606060),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ],
+                        Center(
+                          child: VerticalDivider(
+                            color: Colors.black,
+                            thickness: 2,
+                            endIndent: 9,
+                            indent: 9,
                           ),
                         ),
                       ],
@@ -200,9 +216,19 @@ class DetailScreen extends StatelessWidget {
                           GestureDetector(
                               onTap: () async {
                                 var response = await http.put(
-                                    Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/$placeid"), body: {'gate_entrance': '1'});
+                                    Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '1'});
                                 print('Response status: ${response.statusCode}');
                                 print('Response body: ${response.body}');
+                                // if(_gatestatus==Gatestatusmode.Wait){
+                                //
+                                // }
+                                if(response.statusCode==200){
+                                  setState(() {
+                                    _gatestatusEntrance='Open ';
+                                  });
+                                }else{
+                                  _gatestatusEntrance='...';
+                                }
                               },
                             child: Container(
                               width: 142,
@@ -229,9 +255,19 @@ class DetailScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/$placeid"), body: {'gate_entrance': '0'});
+                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_entrance': '0'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
+                              // if(response.statusCode==200){
+                              //   _gatestatus= 'Close';
+                              // }
+                              if(response.statusCode==200){
+                                setState(() {
+                                  _gatestatusEntrance='Close';
+                                });
+                              }else{
+                                _gatestatusEntrance='...';
+                              }
                             },
                             child: Container(
                               width: 142,
@@ -282,9 +318,19 @@ class DetailScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/$placeid"), body: {'gate_exit': '1'});
+                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '1'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
+                              // if(response.statusCode==200){
+                              //   _gatestatus= 'Open';
+                              // }
+                              if(response.statusCode==200){
+                                setState(() {
+                                  _gatestatusExit='Open ';
+                                });
+                              }else{
+                                _gatestatusExit='...';
+                              }
                             },
                             child: Container(
                               width: 142,
@@ -311,9 +357,19 @@ class DetailScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               var response = await http.put(
-                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/$placeid"), body: {'gate_exit': '0'});
+                                  Uri.parse( "https://myreds.ar-mechatronics.com/v2/api.php/records/places/${widget.placeid}"), body: {'gate_exit': '0'});
                               print('Response status: ${response.statusCode}');
                               print('Response body: ${response.body}');
+                              // if(response.statusCode==200){
+                              //   _gatestatus= 'Close';
+                              // }
+                              if(response.statusCode==200){
+                                setState(() {
+                                  _gatestatusExit='Close';
+                                });
+                              }else{
+                                _gatestatusExit='...';
+                              }
                             },
                             child: Container(
                               width: 142,
@@ -347,3 +403,36 @@ class DetailScreen extends StatelessWidget {
     );
   }
 }
+
+// class WidgetGateStatusText extends StatelessWidget {
+//   final Gatestatusmode status;
+//   const WidgetGateStatusText({
+//     Key? key, required this.status,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // String? stat;
+//     // switch (status){
+//     //   case Gatestatusmode.Wait:
+//     //     stat = '...';
+//     //     break;
+//     //   case Gatestatusmode.Close:
+//     //     stat = 'Close';
+//     //     break;
+//     //   case Gatestatusmode.Open:
+//     //     stat = 'Open';
+//     //     break;
+//     // }
+//
+//     return Text(
+//       stat,
+//       style: TextStyle(
+//         color: Color(0xFF606060),
+//         fontWeight: FontWeight.w400,
+//         fontFamily: 'Roboto',
+//         fontSize: 24,
+//       ),
+//     );
+//   }
+// }
