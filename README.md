@@ -1,16 +1,19 @@
-# myreds_gatecontroller
+# MyREDS Gate Controller
+An app for improving house residency area. The app serves a purpose to allow residents in residency area to have the ability to control the residency's entrance and exit gates.
 
-A new Flutter project.
+This is an app I made for my internship program for 3 months at AR Mechatronics PLT. 
 
-## Getting Started
+## How does it work?
 
-This project is a starting point for a Flutter application.
+The app have 2 navigation page.
+1. Home Page
+2. Detail Page
 
-A few resources to get you started if this is your first Flutter project:
+## Home Page
+User can view lists of residency area locations and location ID's.
+![photo1633519647](https://user-images.githubusercontent.com/90374083/136209340-31f833fb-d6ff-49aa-a8f9-798467133fa6.jpeg)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Detail Page
+User can tap a button to open/close the gate of their chosen residency location.
+![photo1633521042](https://user-images.githubusercontent.com/90374083/136209457-6b612156-6d58-4415-a80e-c9435f3bcb5c.jpeg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
